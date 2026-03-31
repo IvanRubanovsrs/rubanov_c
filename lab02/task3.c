@@ -28,7 +28,9 @@ int main(){
     {"Adolf", dates[2]},
 };
     for(int i=0; i<3; i++){
-        printf("Name: %s, Birth Year: %d.%d.%d\n", persons[i].name, persons[i].birthday.day, persons[i].birthday.month, persons[i].birthday.year);
+        if (dates[i].year >=2000){
+            printf("Name: %s, Birth Year: %d.%d.%d\n", persons[i].name, persons[i].birthday.day, persons[i].birthday.month, persons[i].birthday.year);
+        }
     }
 }
 
