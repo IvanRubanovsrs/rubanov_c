@@ -74,59 +74,68 @@ void addNewStudent(struct Student* students, int count, char* newname, int newag
 int main(){
     int count = 1;
 
+    int curren_do;
+    
     char current_name[100];
-    printf("введите имя студента\n");
-    scanf("%99s", current_name);
     int age;
     float score;
     int intcourse;
-    printf("введите возраст студента\n");
-    scanf("%d", &age);
+    while (1){
+        printf("-----------Выберете что нужно сделать\n-----------1) Вывести список студентов\n-----------2) Добавить студента в список\n-----------3) Найти студента по имени\n-----------4) Отсортировать студентов по баллу\n");
+        scanf("%d", &curren_do);
+        switch (curren_do)
+        {
+        case 1:
+            returnListOfStudents(students, count);
+            printf("_________________________________________\n");
+            break;
+        case 2:
+            printf("-----------------введитеь кол-во студентов-----------------------\n");
+            int c;
+            scanf("%d", &c);
+            for (int i = 0; i<c; i++){
+                printf("введите имя %d студента\n", i);
+                scanf("%99s", current_name);
 
-    printf("введите курс студента(1-4)\n");
-    scanf("%d", &intcourse);
+                printf("введите возраст студента\n");
+                scanf("%d", &age);
 
-    printf("введите балл студента\n");
-    scanf("%f", &score);
+                printf("введите курс студента(1-4)\n");
+                scanf("%d", &intcourse);
 
-    addNewStudent(students, count++, current_name, age, (enum course)(intcourse - 1), score);
+                printf("введите балл студента\n");
+                scanf("%f", &score);
 
-
-    printf("введите имя 2 студента\n");
-    scanf("%99s", &current_name);
-
-    printf("введите возраст 2 студента\n");
-    scanf("%d", &age);
-
-    printf("введите курс 2 студента(1-4)\n");
-    scanf("%d", &intcourse);
-
-    printf("введите балл 2 студента\n");
-    scanf("%f", &score);
-
-    addNewStudent(students, count++, current_name, age, (enum course)(intcourse - 1), score);
-
-    
-    printf("_________________________________\n");
-    printf("введите имя студента для поиска\n");
-    char nameForFind[100];
-    scanf("%99s", nameForFind);
-    struct Student* found = findForName(students, count, nameForFind);
-    if (found != 0) {
-        printf("\nСтудент найден\n");
-        printf("Имя: %s\n", found->name);
-        printf("Возраст: %d\n", found->age);
-        printf("Курс: %d\n", found->current_course + 1);
-        printf("Средний балл: %.2f\n", found->score);
-    } else {
-        printf("\nСтудент с именем '%s' не найден в списке\n", nameForFind);
-    }
-
-
-    sort(students, count);
-    
-    printf("_________________________________\n");
-    printf("список студнетов после сортировки\n");
-    returnListOfStudents(students, count);
+                addNewStudent(students, count++, current_name, age, (enum course)(intcourse - 1), score);
+            }
+            printf("_________________________________________\n");
+            break;
+        case 3:
+            printf("введите имя студента для поиска\n");
+            char nameForFind[100];
+            scanf("%99s", nameForFind);
+            struct Student* found = findForName(students, count, nameForFind);
+            if (found != 0) {
+                printf("\nСтудент найден\n");
+                printf("Имя: %s\n", found->name);
+                printf("Возраст: %d\n", found->age);
+                printf("Курс: %d\n", found->current_course + 1);
+                printf("Средний балл: %.2f\n", found->score);
+                
+            } else {
+                printf("\nСтудент с именем '%s' не найден в списке\n", nameForFind);
+            }
+            printf("_________________________________________\n");
+            break;
+        case 4:
+            sort(students, count);
+            printf("_________________________________________\n");
+            break;
+        default:
+            printf("команда не найдена\n");
+            printf("_________________________________________\n");
+            break;
+        }    
+}
     return 0;
 }
